@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tareas</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <section class="todoapp">
+      <header class="header">
+        <h1 class="header__title">Tareas</h1>
+        <div class="task">
+          <div class="task__input">
+            <input
+              id="new-task-input" 
+              class="new__task-input"
+              placeholder="¿Qué tienes pendiente?"
+              autofocus
+            />
+          </div>
+          <div class="date__class-container">
+            <label class="date__class-label" for="due-date"
+              ></label
+            >
+            <input type="date" class="date__class-input" id="due-date" title="date"/>
+          </div>
+        </div>
+      </header>
+
+      <section class="main">
+        <input id="toggle-all" class="toggle-all" type="checkbox" />
+        <label for="toggle-all">Mark all as complete</label>
+        <!-- Este es el código que se generara con JS-->
+        <ul class="todo-list">
+          <!-- <li class="completed" data-id="abc">
+            <div class="view">
+              <input class="toggle" type="checkbox" title="checkbox" checked />
+              <label class="label__task" title="task">Lorem ipsum dolor sit amet consectetur!
+              </label>
+              <label class="label__missing" title="missing">
+                <span class="text__span">Faltan</span>
+                <span class="num__span">360</span>
+                <span class="text__span">días</span>
+              </label>
+              <button type="button" class="destroy" title="destroy"></button>
+            </div>
+            <input
+              class="edit"
+              title="edit"
+              value="Create a TodoMVC template"
+            />
+          </li> -->
+        </ul>
+      </section>
+      <footer class="footer">
+        <div class="footer__counter">
+          <span class="todo-count">
+            <strong id="pending-count">0</strong> pendiente(s)
+          </span>
+          <button type="button" class="add__task-buttom">Agregar Tarea</button>
+          <button type="button" class="clear-completed">
+            Borrar completados
+          </button>
+        </div>
+        <div class="footer__list">
+          <ul class="filters">
+            <li>
+              <a class="selected filtro all" href="#/">Todos</a>
+            </li>
+            <li>
+              <a class="filtro pending" href="#/active">Pendientes</a>
+            </li>
+            <li>
+              <a class="filtro completed" href="#/completed">Completados</a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </section>
+
+    <footer class="info">
+      <p>
+        Plantilla creada por
+        <a
+          href="https://ing-eduardo-e.github.io/curriculum.github.io/"
+          target="_blank"
+          rel="noopener"
+          >Ing. Eduardo E. Enríquez R.</a
+        >
+      </p>
+    </footer>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
