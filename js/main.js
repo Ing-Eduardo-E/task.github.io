@@ -27,6 +27,7 @@ const task = (() => {
   /**Variables */
   const newTaskInput = document.querySelector(".new__task-input");
   const dateClassInput = document.querySelector(".date__class-input");
+  const checkboxClassInput = document.querySelector(".checkbox__class-input");
   const addTaskButtom = document.querySelector(".add__task-buttom");
   const dateClassLabel = document.querySelector(".date__class-label");
   const todoList = document.querySelector(".todo-list");
@@ -53,6 +54,7 @@ const task = (() => {
     checkedItems.forEach((item) => {
       todoList.appendChild(item);
     });
+    updatePendingCount();
   });
 
   /**Muestra solo las tareas pendientes */
@@ -66,20 +68,18 @@ const task = (() => {
     checkedItems.forEach((item) => {
       todoList.appendChild(item);
     });
+    updatePendingCount();
   });
 
   /**Muestra todas las tareas */
   const all = document.querySelector(".all");
   all.addEventListener("click", () => {
-    const todoItems = todoList.querySelectorAll(".completed");
-    todoList.innerHTML = "";
-    todoItems.forEach((item) => {
-      todoList.appendChild(item);
-    });
+    todoList.innerHTML = ""; // Remove all tasks from the list
+    initializePage();
   });
 
   /**Hacer click en el checkbox */
-  // En este código, cuando se hace clic en el checkbox, se busca el elemento label__task que es hijo del mismo elemento padre del checkbox. Si el checkbox está marcado, se aplica el estilo text-decoration: line-through; al label__task. Si el checkbox no está marcado, se remueve el estilo text-decoration.
+
   todoList.addEventListener("click", function (event) {
     if (event.target.matches('input[type="checkbox"]')) {
       const taskLabel =
@@ -98,6 +98,7 @@ const task = (() => {
       const todoItem = event.target.parentElement.parentElement;
       todoList.removeChild(todoItem);
     }
+    updatePendingCount();
   });
 
   /**Evento para eliminar todas las tareas realizadas checked*/
@@ -174,13 +175,14 @@ const task = (() => {
     const daysLeft = inputDate - currentDate;
     const daysLeftInDays = daysLeft / (1000 * 60 * 60 * 24);
 
-    return Math.floor(daysLeftInDays) + 1;
+    return Math.floor(daysLeftInDays);
   }
 
   /**Limpiar campos */
   function clearFields() {
     newTaskInput.value = "";
     dateClassInput.value = "";
+    checkboxClassInput.checked = false;
   }
 
   /**Crear elementos de la lista */
@@ -200,7 +202,7 @@ const task = (() => {
     toggleInput.setAttribute("type", "checkbox");
     toggleInput.setAttribute("title", "checkbox");
     toggleInput.setAttribute("name", "toggleTask");
-    toggleInput.checked = false;
+    toggleInput.checked = checkboxClassInput.checked;
 
     const taskLabel = document.createElement("label");
     taskLabel.classList.add("label__task");
@@ -252,6 +254,13 @@ const task = (() => {
     updatePendingCount();
   }
 
+  /**
+   * @function updatePendingCount
+   * @param {string} pendingCountElement - Elemento HTML que muestra la cantidad de tareas pendientes.
+   * @description Actualiza el contador de tareas pendientes.
+   * @example
+   * updatePendingCount();
+   */
   function updatePendingCount() {
     const todoList = document.querySelectorAll(".todo-list li");
     let pendingCount = 0;
