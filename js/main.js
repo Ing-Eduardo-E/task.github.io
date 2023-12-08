@@ -6,7 +6,23 @@ const task = (() => {
   "use strict";
 
   /**Arreglo */
-  const registros = [];
+  const registros = [
+    {
+      tarea: "Hacer la compra",
+      fecha: "2023-12-31",
+      checkbox: true,
+    },
+    {
+      tarea: "Llamar al médico",
+      fecha: "2023-12-15",
+      checkbox: false,
+    },
+    {
+      tarea: "Terminar el informe",
+      fecha: "2023-12-20",
+      checkbox: false,
+    },
+  ];
 
   /**Variables */
   const newTaskInput = document.querySelector(".new__task-input");
@@ -16,15 +32,8 @@ const task = (() => {
   const todoList = document.querySelector(".todo-list");
   const clearCompleted = document.querySelector(".clear-completed");
 
-
-  /**==================================Eventos===================================================*/
-
-  // Obtener registros almacenados en localStorage al cargar la página
+  /**Eventos */
   window.addEventListener("load", () => {
-    const storedRegistros = localStorage.getItem("registros");
-    if (storedRegistros) {
-      registros.push(...JSON.parse(storedRegistros));
-    }
     initializePage();
   });
 
@@ -77,10 +86,8 @@ const task = (() => {
         event.target.parentElement.querySelector(".label__task");
       if (event.target.checked) {
         taskLabel.style.textDecoration = "line-through";
-        marcarTareaCompletada();
       } else {
         taskLabel.style.textDecoration = "none";
-        marcarTareaPendiente();
       }
     }
   });
@@ -94,6 +101,7 @@ const task = (() => {
   });
 
   /**Evento para eliminar todas las tareas realizadas checked*/
+
   clearCompleted.addEventListener("click", function (event) {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach((checkbox) => {
@@ -124,66 +132,6 @@ const task = (() => {
   });
 
   /**Funciones */
-
-  // Función para agregar una nueva tarea
-  function agregarTarea() {
-    // Código para agregar la tarea
-
-    // Actualizar el arreglo registros
-    const nuevaTarea = {
-      tarea: newTaskInput.value,
-      fechaEntrega: dateClassInput.value,
-      completado: false,
-    };
-    registros.push(nuevaTarea);
-
-    // Actualizar localStorage
-    localStorage.setItem("registros", JSON.stringify(registros));
-  }
-
-  // Función para marcar una tarea como completada
-  function marcarTareaCompletada() {
-    // Código para marcar la tarea como completada
-
-    // Actualizar el arreglo registros
-    const tareaCompletada = registros.find((tarea) => tarea.tarea === "TAREA");
-    if (tareaCompletada) {
-      tareaCompletada.completado = true;
-    }
-
-    // Actualizar localStorage
-    localStorage.setItem("registros", JSON.stringify(registros));
-  }
-
-  //Función para marcar una tarea como pendiente
-  function marcarTareaPendiente() {
-    // Código para marcar la tarea como pendiente
-
-    // Actualizar el arreglo registros
-    const tareaPendiente = registros.find((tarea) => tarea.tarea === "TAREA");
-    if (tareaPendiente) {
-      tareaPendiente.completado = false;
-    }
-
-    // Actualizar localStorage
-    localStorage.setItem("registros", JSON.stringify(registros));
-  }
-
-  // Función para eliminar una tarea
-  function eliminarTarea() {
-    // Código para eliminar la tarea
-
-    // Actualizar el arreglo registros
-    const tareaEliminadaIndex = registros.findIndex(
-      (tarea) => tarea.tarea === "TAREA"
-    );
-    if (tareaEliminadaIndex !== -1) {
-      registros.splice(tareaEliminadaIndex, 1);
-    }
-
-    // Actualizar localStorage
-    localStorage.setItem("registros", JSON.stringify(registros));
-  }
   function initializePage() {
     registros.forEach((registro) => {
       newTaskInput.value = registro.tarea;
@@ -300,7 +248,6 @@ const task = (() => {
 
     todoList.appendChild(todoItem);
 
-    agregarTarea();
     clearFields();
     updatePendingCount();
   }
