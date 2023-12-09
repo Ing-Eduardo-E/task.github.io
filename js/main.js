@@ -6,6 +6,10 @@ const task = (() => {
   "use strict";
 
   /**Arreglo */
+  /**
+   * Array of registros.
+   * @type {Array<Object>}
+   */
   const registros = [
     {
       tarea: "Hacer la compra",
@@ -24,7 +28,7 @@ const task = (() => {
     },
   ];
 
-  /**Variables */
+  /**===========================Variables======================*/
   const newTaskInput = document.querySelector(".new__task-input");
   const dateClassInput = document.querySelector(".date__class-input");
   const checkboxClassInput = document.querySelector(".checkbox__class-input");
@@ -132,7 +136,11 @@ const task = (() => {
     updatePendingCount();
   });
 
-  /**Funciones */
+  /**==========================Funciones====================*/
+
+  /**
+  * Inicializa la página al poblar las tareas desde el arreglo registros.
+   */
   function initializePage() {
     registros.forEach((registro) => {
       newTaskInput.value = registro.tarea;
@@ -142,7 +150,10 @@ const task = (() => {
     });
   }
 
-  /**Validación de campos */
+
+  /**
+   * Validates the data entered by the user.
+   */
   function dataValidation() {
     const currentDate = new Date();
     const inputDate = new Date(dateClassInput.value);
@@ -157,12 +168,11 @@ const task = (() => {
       dateClassInput.value === "" ||
       inputDate < currentDate.setDate(currentDate.getDate())
     ) {
-      dateClassLabel.textContent = "¡Corrige la fecha!";
+      dateClassLabel.textContent = "¡Corrige la fecha!!!!";
       return;
     } else {
       dateClassLabel.textContent = "";
     }
-
     addTask();
   }
 

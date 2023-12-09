@@ -1,3 +1,16 @@
+/**
+ * Resetear atributos en HTML
+ * 
+ * Se establecen los estilos iniciales para los elementos HTML, eliminando márgenes, rellenos, bordes y estableciendo el tamaño de fuente y la alineación vertical.
+ * 
+ * @selector html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
+ * @property margin: 0;
+ * @property padding: 0;
+ * @property border: 0;
+ * @property font-size: 100%;
+ * @property font: inherit;
+ * @property vertical-align: baseline;
+ */
 /* Resetear atributos en HTML */
 html,
 body,
