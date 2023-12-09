@@ -5,7 +5,15 @@
 const task = (() => {
   "use strict";
 
-  /**Arreglo */
+  /**===========================Variables======================*/
+  const newTaskInput = document.querySelector(".new__task-input");
+  const dateClassInput = document.querySelector(".date__class-input");
+  const checkboxClassInput = document.querySelector(".checkbox__class-input");
+  const addTaskButtom = document.querySelector(".add__task-buttom");
+  const dateClassLabel = document.querySelector(".date__class-label");
+  const todoList = document.querySelector(".todo-list");
+  const clearCompleted = document.querySelector(".clear-completed");
+
   /**
    * Array of registros.
    * @type {Array<Object>}
@@ -28,16 +36,7 @@ const task = (() => {
     },
   ];
 
-  /**===========================Variables======================*/
-  const newTaskInput = document.querySelector(".new__task-input");
-  const dateClassInput = document.querySelector(".date__class-input");
-  const checkboxClassInput = document.querySelector(".checkbox__class-input");
-  const addTaskButtom = document.querySelector(".add__task-buttom");
-  const dateClassLabel = document.querySelector(".date__class-label");
-  const todoList = document.querySelector(".todo-list");
-  const clearCompleted = document.querySelector(".clear-completed");
-
-  /**Eventos */
+  /**============================Eventos=========================*/
   window.addEventListener("load", () => {
     initializePage();
   });
@@ -139,7 +138,7 @@ const task = (() => {
   /**==========================Funciones====================*/
 
   /**
-  * Inicializa la página al poblar las tareas desde el arreglo registros.
+   * Inicializa la página al poblar las tareas desde el arreglo registros.
    */
   function initializePage() {
     registros.forEach((registro) => {
@@ -149,7 +148,6 @@ const task = (() => {
       updatePendingCount();
     });
   }
-
 
   /**
    * Validates the data entered by the user.
