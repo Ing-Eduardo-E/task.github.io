@@ -38,6 +38,29 @@ const task = (() => {
 
   /**============================Eventos=========================*/
   window.addEventListener("load", () => {
+    // Guardar registros en localStorage
+    localStorage.setItem("registros", JSON.stringify(registros));
+
+    // Verificar si existe el localStorage
+    if (localStorage) {
+      // Obtener los registros del localStorage
+      const registrosFromLocalStorage = JSON.parse(
+        localStorage.getItem("registros")
+      );
+
+      // Verificar si existen registros en el localStorage
+      if (registrosFromLocalStorage) {
+        // Llenar el arreglo 'registros' con los registros del localStorage
+        registros.length = 0; // Limpiar el arreglo 'registros'
+        registros.push(...registrosFromLocalStorage);
+      } else {
+        // Crear el localStorage con los registros iniciales
+        localStorage.setItem("registros", JSON.stringify(registros));
+      }
+    } else {
+      // Crear el arreglo 'registros' y el localStorage con los registros iniciales
+      localStorage.setItem("registros", JSON.stringify(registros));
+    }
     initializePage();
   });
 
@@ -171,7 +194,19 @@ const task = (() => {
     } else {
       dateClassLabel.textContent = "";
     }
+    newtask(newTaskInput, dateClassInput, checkboxClassInput);
     addTask();
+  }
+
+  function newtask(newTaskInput, dateClassInput, checkboxClassInput) {
+    // Agregar un nuevo registro al arreglo 'registros'
+    registros.push({
+      tarea: newTaskInput.value,
+      fecha: dateClassInput.value,
+      checkbox: checkboxClassInput.checked,
+    });
+    // Actualizar el localStorage con los nuevos registros
+    localStorage.setItem("registros", JSON.stringify(registros));
   }
 
   /**Calcula los días que faltan para la entrega */
