@@ -158,9 +158,17 @@ const task = (() => {
         const todoItem = checkbox.parentElement.parentElement;
         if (todoList.contains(todoItem)) {
           todoList.removeChild(todoItem);
+
+          // Eliminar la tarea del array
+          const index = Array.from(todoList.children).indexOf(todoItem);
+          registros.splice(index, 1);
         }
       }
     });
+
+    // Actualizar el localStorage
+    localStorage.setItem("registros", JSON.stringify(registros));
+
     updatePendingCount();
   });
 
