@@ -174,7 +174,7 @@ const task = (() => {
 
   /**checked a todas las listas y viceversa */
   const toggleAll = document.querySelector(".toggle-all");
-  toggleAll.addEventListener("click", function (event) {
+  function toggleAllTasks(event) {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach((checkbox) => {
       checkbox.checked = event.target.checked;
@@ -185,8 +185,12 @@ const task = (() => {
         taskLabel.style.textDecoration = "none";
       }
     });
+
     updatePendingCount();
-  });
+  }
+
+  // Utilizar la función
+  toggleAll.addEventListener("click", toggleAllTasks);
 
   /**==========================Funciones====================*/
 
