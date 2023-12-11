@@ -139,12 +139,18 @@ const task = (() => {
     if (event.target.matches('button[type="button"]')) {
       const todoItem = event.target.parentElement.parentElement;
       todoList.removeChild(todoItem);
+
+      // Eliminar la tarea del array
+      const index = Array.from(todoList.children).indexOf(todoItem);
+      registros.splice(index, 1);
+
+      // Actualizar el localStorage
+      localStorage.setItem("registros", JSON.stringify(registros));
     }
     updatePendingCount();
   });
 
   /**Evento para eliminar todas las tareas realizadas checked*/
-
   clearCompleted.addEventListener("click", function (event) {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach((checkbox) => {
