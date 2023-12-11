@@ -21,20 +21,28 @@ const task = (() => {
   const registros = [
     {
       tarea: "Hacer la compra",
-      fecha: "2023-12-31",
+      fecha: getFutureDate(15),
       checkbox: true,
     },
     {
       tarea: "Llamar al médico",
-      fecha: "2023-12-15",
+      fecha: getFutureDate(5),
       checkbox: false,
     },
     {
       tarea: "Terminar el informe",
-      fecha: "2023-12-20",
+      fecha: getFutureDate(10),
       checkbox: false,
     },
   ];
+
+  function getFutureDate(days) {
+    const currentDate = new Date();
+    const futureDate = new Date(
+      currentDate.getTime() + days * 24 * 60 * 60 * 1000
+    );
+    return futureDate.toISOString().split("T")[0];
+  }
 
   /**============================Eventos=========================*/
   window.addEventListener("load", () => {
@@ -105,7 +113,6 @@ const task = (() => {
   });
 
   /**Hacer click en el checkbox */
-
   todoList.addEventListener("click", function (event) {
     if (event.target.matches('input[type="checkbox"]')) {
       const taskLabel =
@@ -115,6 +122,15 @@ const task = (() => {
       } else {
         taskLabel.style.textDecoration = "none";
       }
+
+      // Actualizar el registro en el array
+      const checkboxClassInput = event.target;
+      const todoItem = checkboxClassInput.parentElement.parentElement;
+      const index = Array.from(todoList.children).indexOf(todoItem);
+      registros[index].checkbox = checkboxClassInput.checked;
+
+      // Actualizar el registro en el localStorage
+      localStorage.setItem("registros", JSON.stringify(registros));
     }
   });
 
@@ -167,6 +183,7 @@ const task = (() => {
     registros.forEach((registro) => {
       newTaskInput.value = registro.tarea;
       dateClassInput.value = registro.fecha;
+      checkboxClassInput.checked = registro.checkbox;
       addTask();
       updatePendingCount();
     });
@@ -195,6 +212,7 @@ const task = (() => {
       dateClassLabel.textContent = "";
     }
     newtask(newTaskInput, dateClassInput, checkboxClassInput);
+    updateLocalStorage(registros);
     addTask();
   }
 
@@ -205,6 +223,9 @@ const task = (() => {
       fecha: dateClassInput.value,
       checkbox: checkboxClassInput.checked,
     });
+  }
+
+  function updateLocalStorage(registros) {
     // Actualizar el localStorage con los nuevos registros
     localStorage.setItem("registros", JSON.stringify(registros));
   }
